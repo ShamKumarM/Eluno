@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eluno AI // Operator Authentication</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Supabase JS Client SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles_orange.css">
+  <style>
+    /* Specific overrides and classes for the Login Page layout */
+    .login-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      position: relative;
+      z-index: 1;
+      padding: 20px;
+    }
+    
+    .login-card {
+      width: 100%;
+      max-width: 420px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-white-low);
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.02);
+      backdrop-filter: var(--glass-blur-heavy);
+      transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
+      position: relative;
+    }
+    
+    .login-card:hover {
+      border-color: var(--border-orange-high);
+      box-shadow: 0 25px 50px rgba(255, 107, 0, 0.08), 0 0 20px var(--orange-glow);
+    }
+
+    .login-logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+    
+    .login-logo .logo-orange-glow {
+      width: 18px;
+      height: 18px;
+    }
+    
+    .login-logo .logo-text {
+      font-size: 24px;
+    }
+
+    .login-tabs {
+      display: flex;
+      background: rgba(15, 23, 42, 0.04);
+      padding: 4px;
+      border-radius: 8px;
+      margin-bottom: 32px;
+      border: 1px solid var(--border-white-low);
+    }
+    
+    .login-tab-btn {
+      flex: 1;
+      background: transparent;
+      border: none;
+      padding: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      cursor: pointer;
+      border-radius: 6px;
+      transition: var(--transition-fast);
+      font-family: var(--font-body);
+    }
+    
+    .login-tab-btn.active {
+      background: #ffffff;
+      color: var(--orange-primary);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    .form-group label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      letter-spacing: 0.5px;
+    }
+    
+    .input-with-icon {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    
+    .input-with-icon i {
+      position: absolute;
+      left: 14px;
+      color: var(--text-muted);
+      width: 16px;
+      height: 16px;
+      pointer-events: none;
+    }
+    
+    .input-with-icon input {
+      padding-left: 42px !important;
+    }
+    
+    .login-footer-text {
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 24px;
+    }
+    
+    .login-footer-text a {
+      color: var(--orange-primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    
+    .login-footer-text a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body class="light-theme">
+  <!-- 3D Canvas Background -->
+  <canvas id="bg-3d-canvas" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2; pointer-events: none; background: radial-gradient(circle at 50% 50%, #ffffff 0%, #e5e7eb 100%);"></canvas>
+
+  <div class="login-wrapper">
+    <div class="login-card">
+      <div class="card-glow" style="background: radial-gradient(circle, var(--orange-glow) 0%, transparent 70%);"></div>
+      
+      <!-- Brand Logo -->
+      <div class="login-logo">
+        <div class="logo-orange-glow" style="background: var(--orange-gradient); border-radius: 50%; box-shadow: 0 0 15px var(--orange-glow-intense);"></div>
+        <span class="logo-text">ELUNO<span class="logo-sub">AI</span></span>
+      </div>
+
+      <!-- Sign In / Sign Up Selector Tabs -->
+      <div class="login-tabs">
+        <button class="login-tab-btn active" id="tab-signin">Sign In</button>
+        <button class="login-tab-btn" id="tab-signup">Sign Up</button>
+      </div>
+
+      <!-- Authentication Form -->
+      <form id="auth-form">
+        <!-- Full Name (Only visible for registration) -->
+        <div class="form-group hidden" id="group-fullname">
+          <label for="fullname">Full Name</label>
+          <div class="input-with-icon">
+            <i data-lucide="user"></i>
+            <input type="text" id="fullname" class="form-input" placeholder="Enter your name">
+          </div>
+        </div>
+
+        <!-- Role Select (Only visible for registration) -->
+        <div class="form-group hidden" id="group-role">
+          <label for="user-role">System Access Role</label>
+          <select id="user-role" class="form-select" style="width: 100%;">
+            <option value="operator">System Operator</option>
+            <option value="administrator">Central Administrator</option>
+            <option value="viewer">Executive Viewer</option>
+          </select>
+        </div>
+
+        <!-- Email Address -->
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <div class="input-with-icon">
+            <i data-lucide="mail"></i>
+            <input type="email" id="email" class="form-input" placeholder="name@eluno.ai" required>
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="input-with-icon">
+            <i data-lucide="lock"></i>
+            <input type="password" id="password" class="form-input" placeholder="••••••••" required>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-orange btn-full mt-24" id="auth-submit-btn">
+          <i data-lucide="log-in"></i>
+          <span id="auth-btn-text">Authenticate Operator</span>
+        </button>
+      </form>
+
+      <!-- Toggle Help Footer -->
+      <p class="login-footer-text" id="auth-footer">
+        Secured by Supabase Identity.
+      </p>
+    </div>
+  </div>
+
+  <!-- Notification Toaster -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Three.js Visualizer Core for rotating Background model -->
+  <script>
+    // Simplified background renderer for login page
+    document.addEventListener("DOMContentLoaded", () => {
+      const canvas = document.getElementById("bg-3d-canvas");
+      if (!canvas) return;
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+      camera.position.z = 8;
+
+      const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      // Add lights
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.95);
+      scene.add(ambientLight);
+
+      const dirLight = new THREE.DirectionalLight(0xffffff, 0.5);
+      dirLight.position.set(2, 4, 5);
+      scene.add(dirLight);
+
+      // Load eyewear_luxury.png
+      const textureLoader = new THREE.TextureLoader();
+      let eyewearMesh;
+
+      textureLoader.load("eyewear_luxury.png", (texture) => {
+        const geometry = new THREE.PlaneGeometry(4.5, 4.5);
+        const material = new THREE.MeshBasicMaterial({
+          map: texture,
+          side: THREE.DoubleSide,
+          transparent: true,
+          opacity: 0.95
+        });
+
+        eyewearMesh = new THREE.Mesh(geometry, material);
+        if (window.innerWidth > 992) {
+          eyewearMesh.position.set(2.4, 0, 0);
+        } else {
+          eyewearMesh.position.set(0, -1.2, 0);
+        }
+        scene.add(eyewearMesh);
+      });
+
+      // Animate background rotation
+      function animate() {
+        requestAnimationFrame(animate);
+        if (eyewearMesh) {
+          eyewearMesh.rotation.y += 0.005;
+          eyewearMesh.rotation.x = Math.sin(Date.now() * 0.0005) * 0.15;
+        }
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener("resize", () => {
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h);
+        if (eyewearMesh) {
+          if (w > 992) {
+            eyewearMesh.position.set(2.4, 0, 0);
+          } else {
+            eyewearMesh.position.set(0, -1.2, 0);
+          }
+        }
+      });
+
+      // Replace Lucide Icons
+      lucide.createIcons();
+    });
+  </script>
+  <!-- Auth Script -->
+  <script src="login.js"></script>
+</body>
+</html>

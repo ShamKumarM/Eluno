@@ -1,0 +1,1001 @@
+stage,stage_encoded,sla_remaining,will_breach
+QC,5,2502,0
+Coating,3,1626,0
+Mounting,4,-11,1
+Lab Surfacing,2,664,0
+Stocked at Inventary,1,2118,0
+Mounting,4,2835,1
+Mounting,4,1255,0
+Mounting,4,1441,0
+QC,5,1847,0
+Coating,3,452,0
+QC,5,1095,0
+Dispatch,6,2745,1
+Intake,0,340,0
+Dispatch,6,328,0
+Coating,3,439,0
+Intake,0,2329,0
+Coating,3,51,1
+Lab Surfacing,2,605,0
+Stocked at Inventary,1,279,0
+Stocked at Inventary,1,707,0
+Stocked at Inventary,1,55,1
+Lab Surfacing,2,246,0
+Dispatch,6,1699,0
+Lab Surfacing,2,2313,0
+Delivered,7,0,0
+Lab Surfacing,2,2263,0
+Delivered,7,0,0
+Lab Surfacing,2,244,0
+Stocked at Inventary,1,1133,0
+Delivered,7,0,0
+Coating,3,2637,0
+Stocked at Inventary,1,2854,0
+Intake,0,2463,0
+Coating,3,1009,0
+Dispatch,6,2861,0
+QC,5,418,0
+Mounting,4,1584,0
+Mounting,4,1885,1
+QC,5,2394,0
+Intake,0,2623,1
+QC,5,1503,1
+QC,5,2279,0
+Stocked at Inventary,1,1413,0
+Lab Surfacing,2,896,0
+QC,5,1767,1
+Delivered,7,0,0
+Stocked at Inventary,1,1906,0
+Dispatch,6,1851,1
+Delivered,7,0,0
+Dispatch,6,2002,0
+Mounting,4,1653,0
+Lab Surfacing,2,1566,0
+Intake,0,419,0
+Dispatch,6,46,0
+Delivered,7,0,0
+Mounting,4,2076,1
+Coating,3,1646,0
+Mounting,4,2066,0
+Stocked at Inventary,1,2308,0
+Stocked at Inventary,1,-53,1
+Intake,0,516,0
+Delivered,7,0,0
+Dispatch,6,1749,0
+Lab Surfacing,2,1209,0
+QC,5,1737,0
+Dispatch,6,920,0
+Mounting,4,987,0
+Delivered,7,0,0
+Dispatch,6,2721,0
+Intake,0,1666,0
+Lab Surfacing,2,1731,0
+QC,5,144,0
+Mounting,4,2880,0
+Intake,0,127,1
+Delivered,7,0,0
+Dispatch,6,528,1
+Lab Surfacing,2,2693,0
+Dispatch,6,1840,0
+Intake,0,202,0
+Mounting,4,865,0
+Mounting,4,1322,0
+Intake,0,1466,0
+Intake,0,1369,0
+Intake,0,1059,0
+Mounting,4,1796,0
+Delivered,7,0,0
+Stocked at Inventary,1,1269,0
+Mounting,4,2127,0
+Lab Surfacing,2,1900,0
+Stocked at Inventary,1,83,1
+Dispatch,6,2060,0
+Coating,3,2789,0
+Lab Surfacing,2,2364,0
+Delivered,7,0,0
+Delivered,7,0,0
+Coating,3,2244,0
+Dispatch,6,2094,0
+Intake,0,107,1
+Intake,0,2039,1
+QC,5,1826,0
+Coating,3,-102,1
+Intake,0,1707,0
+Mounting,4,1294,1
+Stocked at Inventary,1,459,1
+Intake,0,2459,0
+Dispatch,6,2163,0
+Delivered,7,0,0
+Dispatch,6,82,0
+QC,5,735,0
+Stocked at Inventary,1,2478,0
+Mounting,4,836,0
+Coating,3,1586,0
+Coating,3,685,0
+Intake,0,633,0
+Mounting,4,1365,0
+Mounting,4,2221,0
+Dispatch,6,-79,1
+Mounting,4,127,0
+Intake,0,884,0
+Intake,0,2789,1
+Lab Surfacing,2,2828,0
+Mounting,4,2096,0
+Lab Surfacing,2,341,0
+Stocked at Inventary,1,2749,0
+Delivered,7,0,0
+Mounting,4,1044,0
+Mounting,4,370,0
+QC,5,1870,0
+Lab Surfacing,2,1655,0
+Lab Surfacing,2,2402,0
+Lab Surfacing,2,310,0
+Lab Surfacing,2,1369,0
+Dispatch,6,1458,0
+Mounting,4,1658,0
+Lab Surfacing,2,-57,1
+Lab Surfacing,2,1621,0
+Delivered,7,0,0
+Stocked at Inventary,1,2160,0
+Coating,3,291,0
+Mounting,4,230,0
+Coating,3,2394,1
+Delivered,7,0,0
+Intake,0,243,1
+Delivered,7,0,0
+Stocked at Inventary,1,2813,0
+QC,5,487,0
+Dispatch,6,1894,0
+Stocked at Inventary,1,17,1
+Stocked at Inventary,1,1154,0
+Mounting,4,1099,0
+Lab Surfacing,2,487,0
+Coating,3,2533,0
+Intake,0,32,1
+Lab Surfacing,2,136,0
+Intake,0,2484,0
+Coating,3,1354,0
+Coating,3,1918,0
+Intake,0,1765,0
+Mounting,4,562,1
+QC,5,2363,0
+QC,5,2573,0
+Lab Surfacing,2,1520,0
+Dispatch,6,2793,0
+Delivered,7,0,0
+Delivered,7,0,0
+QC,5,60,0
+Stocked at Inventary,1,947,0
+Delivered,7,0,0
+Coating,3,64,1
+Delivered,7,0,0
+Stocked at Inventary,1,2578,0
+Intake,0,914,0
+Coating,3,198,0
+Lab Surfacing,2,2836,0
+Lab Surfacing,2,1908,0
+Mounting,4,2017,0
+Stocked at Inventary,1,720,0
+Coating,3,894,0
+QC,5,652,0
+QC,5,1440,0
+QC,5,470,0
+Intake,0,1639,0
+Lab Surfacing,2,816,0
+Intake,0,2528,0
+Intake,0,1476,0
+Coating,3,2068,0
+Intake,0,1155,0
+Mounting,4,1749,0
+Lab Surfacing,2,2716,0
+Delivered,7,0,0
+QC,5,1647,0
+Lab Surfacing,2,881,0
+Stocked at Inventary,1,158,1
+Coating,3,1411,0
+Mounting,4,2863,0
+QC,5,666,0
+Stocked at Inventary,1,2198,0
+Dispatch,6,2082,0
+Delivered,7,0,0
+Intake,0,2003,0
+Delivered,7,0,0
+Coating,3,1859,0
+Mounting,4,2186,0
+Dispatch,6,682,0
+Mounting,4,717,0
+Mounting,4,2421,0
+Delivered,7,0,0
+Lab Surfacing,2,1891,0
+Intake,0,1578,0
+QC,5,732,0
+Intake,0,2611,0
+Mounting,4,238,1
+Coating,3,2880,0
+Stocked at Inventary,1,874,0
+QC,5,743,0
+Dispatch,6,1026,0
+Lab Surfacing,2,638,0
+Intake,0,881,0
+Delivered,7,0,0
+Lab Surfacing,2,1276,0
+Stocked at Inventary,1,1092,0
+Lab Surfacing,2,1026,0
+Delivered,7,0,0
+Mounting,4,2763,0
+QC,5,1300,0
+Mounting,4,2509,0
+Mounting,4,2560,0
+Dispatch,6,1373,0
+Coating,3,2827,0
+Mounting,4,1417,0
+Delivered,7,0,0
+Dispatch,6,1568,0
+Mounting,4,1156,0
+Stocked at Inventary,1,1877,0
+Lab Surfacing,2,1015,0
+Lab Surfacing,2,2201,0
+Mounting,4,718,0
+Lab Surfacing,2,2788,0
+Mounting,4,1135,0
+QC,5,2386,0
+Dispatch,6,229,0
+Intake,0,708,0
+Coating,3,-44,1
+Stocked at Inventary,1,2341,0
+Lab Surfacing,2,2302,0
+Coating,3,437,1
+Lab Surfacing,2,2610,0
+Lab Surfacing,2,2083,0
+Intake,0,1079,0
+Mounting,4,1473,0
+QC,5,1924,0
+Mounting,4,369,0
+Intake,0,1164,0
+Mounting,4,1404,0
+Intake,0,975,0
+QC,5,1461,0
+Intake,0,2508,0
+Coating,3,1257,0
+Lab Surfacing,2,-15,1
+Mounting,4,2013,0
+Lab Surfacing,2,557,0
+Intake,0,1654,1
+Dispatch,6,-8,1
+Coating,3,572,0
+Mounting,4,989,0
+Coating,3,1862,0
+Coating,3,2753,0
+Stocked at Inventary,1,1076,0
+Intake,0,858,0
+Lab Surfacing,2,1216,0
+Coating,3,1725,0
+Mounting,4,645,0
+Stocked at Inventary,1,-120,1
+Delivered,7,0,0
+Delivered,7,0,0
+Lab Surfacing,2,1162,0
+Stocked at Inventary,1,717,0
+Stocked at Inventary,1,197,1
+Stocked at Inventary,1,1253,0
+Delivered,7,0,0
+QC,5,78,1
+Intake,0,574,0
+Dispatch,6,-34,1
+Lab Surfacing,2,1606,0
+Delivered,7,0,0
+Dispatch,6,2543,1
+QC,5,764,0
+Mounting,4,1165,0
+Intake,0,801,0
+QC,5,1291,1
+Dispatch,6,1587,0
+QC,5,860,1
+QC,5,2320,0
+Coating,3,411,0
+Lab Surfacing,2,2095,0
+QC,5,1504,0
+Dispatch,6,2386,0
+Delivered,7,0,0
+Delivered,7,0,0
+Mounting,4,836,0
+Stocked at Inventary,1,856,0
+QC,5,1038,0
+Stocked at Inventary,1,1206,0
+Stocked at Inventary,1,1287,0
+Coating,3,1246,0
+Delivered,7,0,0
+Lab Surfacing,2,893,0
+Dispatch,6,598,0
+Delivered,7,0,0
+Mounting,4,1844,0
+Coating,3,1689,0
+Dispatch,6,2497,0
+Intake,0,187,0
+Lab Surfacing,2,190,1
+Lab Surfacing,2,983,0
+Stocked at Inventary,1,573,0
+QC,5,2053,0
+Intake,0,-53,1
+Stocked at Inventary,1,554,0
+QC,5,1047,0
+Delivered,7,0,0
+Delivered,7,0,0
+Mounting,4,1120,0
+Dispatch,6,1750,0
+Dispatch,6,2625,0
+Dispatch,6,2069,1
+Stocked at Inventary,1,132,1
+Lab Surfacing,2,872,0
+QC,5,1714,0
+Coating,3,2487,0
+Dispatch,6,637,0
+Stocked at Inventary,1,1463,0
+Coating,3,977,0
+Dispatch,6,2869,0
+Lab Surfacing,2,1124,0
+Intake,0,2627,0
+Mounting,4,1537,0
+Lab Surfacing,2,2628,0
+Intake,0,1110,0
+Coating,3,1994,0
+Coating,3,768,0
+Lab Surfacing,2,1906,0
+QC,5,2447,0
+QC,5,392,0
+Dispatch,6,1857,0
+Intake,0,1975,0
+Coating,3,1661,1
+QC,5,2005,0
+Intake,0,1493,0
+Stocked at Inventary,1,1571,0
+QC,5,614,0
+QC,5,2862,0
+Dispatch,6,1484,0
+Dispatch,6,79,0
+Coating,3,1906,0
+Intake,0,2406,0
+QC,5,89,0
+Mounting,4,1107,0
+Mounting,4,2010,0
+QC,5,2141,1
+QC,5,2596,1
+Coating,3,1274,0
+Dispatch,6,936,0
+Intake,0,2811,0
+Dispatch,6,2567,0
+QC,5,1734,1
+Stocked at Inventary,1,354,0
+Coating,3,1677,0
+Mounting,4,108,0
+Dispatch,6,2070,1
+Intake,0,1888,1
+Delivered,7,0,0
+Intake,0,1921,0
+Lab Surfacing,2,1869,0
+QC,5,808,0
+Intake,0,1073,0
+Intake,0,2123,0
+Delivered,7,0,0
+Stocked at Inventary,1,2116,0
+Delivered,7,0,0
+Delivered,7,0,0
+Dispatch,6,2844,0
+Delivered,7,0,0
+Dispatch,6,894,0
+QC,5,874,0
+Lab Surfacing,2,2019,0
+QC,5,1777,0
+Mounting,4,2274,1
+Intake,0,1718,0
+Mounting,4,2647,1
+Delivered,7,0,0
+Intake,0,219,0
+Delivered,7,0,0
+QC,5,2368,0
+Coating,3,2220,0
+Mounting,4,2653,0
+Intake,0,241,1
+Delivered,7,0,0
+Dispatch,6,29,0
+QC,5,1207,0
+Delivered,7,0,0
+Intake,0,803,0
+Dispatch,6,-99,1
+Mounting,4,2742,0
+Coating,3,1544,0
+Stocked at Inventary,1,936,0
+Coating,3,2150,0
+Lab Surfacing,2,2594,0
+QC,5,552,0
+Coating,3,2682,0
+Coating,3,923,1
+Coating,3,1357,1
+Intake,0,901,0
+Lab Surfacing,2,2746,0
+Delivered,7,0,0
+Delivered,7,0,0
+Dispatch,6,800,1
+Delivered,7,0,0
+Delivered,7,0,0
+QC,5,2402,0
+Stocked at Inventary,1,-37,1
+Mounting,4,257,1
+Dispatch,6,1289,0
+Dispatch,6,2177,0
+Coating,3,439,0
+QC,5,249,0
+Dispatch,6,28,0
+Intake,0,1545,0
+Intake,0,587,0
+QC,5,792,0
+Delivered,7,0,0
+Stocked at Inventary,1,-39,1
+Mounting,4,666,0
+Delivered,7,0,0
+Delivered,7,0,0
+Dispatch,6,1376,0
+QC,5,144,0
+Stocked at Inventary,1,1698,0
+Stocked at Inventary,1,2163,0
+Mounting,4,844,0
+Intake,0,1506,0
+Stocked at Inventary,1,1997,1
+Lab Surfacing,2,-96,1
+Delivered,7,0,0
+Delivered,7,0,0
+Intake,0,870,0
+Lab Surfacing,2,2100,1
+Coating,3,1046,0
+Dispatch,6,725,0
+Stocked at Inventary,1,853,1
+Intake,0,446,0
+Intake,0,1559,0
+QC,5,1870,0
+Mounting,4,2490,0
+Lab Surfacing,2,2589,0
+Mounting,4,1633,0
+Coating,3,2650,0
+Delivered,7,0,0
+Lab Surfacing,2,1202,0
+Dispatch,6,2780,0
+Mounting,4,1894,0
+Delivered,7,0,0
+Stocked at Inventary,1,331,0
+QC,5,902,0
+Dispatch,6,2874,0
+Dispatch,6,1297,0
+Coating,3,1894,0
+Intake,0,782,0
+QC,5,880,0
+Stocked at Inventary,1,2020,1
+Coating,3,996,0
+Mounting,4,2695,0
+Mounting,4,2365,0
+Dispatch,6,1467,0
+Dispatch,6,299,0
+Coating,3,1756,0
+Lab Surfacing,2,903,0
+Dispatch,6,1127,0
+Mounting,4,50,1
+Mounting,4,-90,1
+Coating,3,656,0
+Intake,0,1509,0
+Delivered,7,0,0
+Lab Surfacing,2,2105,0
+QC,5,1461,0
+Lab Surfacing,2,1597,0
+Stocked at Inventary,1,831,0
+Lab Surfacing,2,1759,0
+Dispatch,6,1519,0
+Lab Surfacing,2,2362,0
+Delivered,7,0,0
+Mounting,4,2112,0
+Delivered,7,0,0
+Delivered,7,0,0
+Stocked at Inventary,1,1557,1
+Lab Surfacing,2,1571,0
+Lab Surfacing,2,2194,0
+Lab Surfacing,2,1461,1
+QC,5,810,0
+Intake,0,1388,0
+Lab Surfacing,2,-82,1
+Mounting,4,704,0
+Intake,0,1952,0
+Delivered,7,0,0
+Stocked at Inventary,1,1037,0
+Intake,0,2270,0
+Stocked at Inventary,1,-7,1
+Stocked at Inventary,1,232,1
+Delivered,7,0,0
+Coating,3,1816,0
+Lab Surfacing,2,1171,1
+Mounting,4,1758,0
+Stocked at Inventary,1,858,0
+Lab Surfacing,2,2375,1
+Intake,0,1754,0
+Lab Surfacing,2,1453,0
+Stocked at Inventary,1,68,1
+Stocked at Inventary,1,2423,0
+Delivered,7,0,0
+Mounting,4,1423,0
+QC,5,1744,0
+Lab Surfacing,2,1103,0
+Stocked at Inventary,1,2182,0
+Stocked at Inventary,1,2532,0
+Stocked at Inventary,1,2803,1
+Coating,3,46,0
+Coating,3,1223,0
+Intake,0,1251,0
+Delivered,7,0,0
+Coating,3,2628,0
+QC,5,1170,0
+QC,5,897,0
+Intake,0,1263,1
+Intake,0,1249,0
+Stocked at Inventary,1,597,0
+Mounting,4,15,1
+QC,5,2118,0
+Stocked at Inventary,1,1921,1
+Coating,3,2154,0
+Delivered,7,0,0
+Delivered,7,0,0
+Intake,0,192,1
+Stocked at Inventary,1,1826,0
+Delivered,7,0,0
+Intake,0,2767,0
+Stocked at Inventary,1,2522,0
+Delivered,7,0,0
+QC,5,1888,0
+Lab Surfacing,2,2460,0
+Delivered,7,0,0
+Dispatch,6,1311,0
+Dispatch,6,461,0
+Mounting,4,273,0
+Mounting,4,2239,0
+Coating,3,422,0
+Dispatch,6,1506,1
+QC,5,1924,0
+Mounting,4,2191,1
+Stocked at Inventary,1,77,0
+Lab Surfacing,2,2419,0
+Coating,3,205,0
+Intake,0,2738,0
+Coating,3,2198,0
+Intake,0,2195,0
+QC,5,696,1
+Dispatch,6,1576,1
+Mounting,4,1294,0
+Coating,3,701,0
+Intake,0,633,0
+Coating,3,161,0
+QC,5,1700,0
+Coating,3,2749,0
+Coating,3,2,1
+Lab Surfacing,2,1839,1
+Dispatch,6,-114,1
+Dispatch,6,751,0
+Lab Surfacing,2,-110,1
+Stocked at Inventary,1,873,0
+Dispatch,6,174,0
+Coating,3,1217,0
+Dispatch,6,488,0
+Mounting,4,1569,0
+Dispatch,6,-77,1
+Coating,3,590,1
+Mounting,4,2446,1
+Dispatch,6,1662,0
+QC,5,1450,0
+Stocked at Inventary,1,795,0
+QC,5,1615,0
+Mounting,4,876,0
+QC,5,1503,0
+Intake,0,-67,1
+Stocked at Inventary,1,2603,1
+Delivered,7,0,0
+Coating,3,442,1
+Intake,0,785,0
+Delivered,7,0,0
+Delivered,7,0,0
+Mounting,4,965,0
+Coating,3,247,0
+Delivered,7,0,0
+Lab Surfacing,2,228,0
+Mounting,4,2801,0
+Stocked at Inventary,1,43,1
+Intake,0,273,1
+Intake,0,994,0
+Lab Surfacing,2,2382,0
+Delivered,7,0,0
+Intake,0,1368,0
+Lab Surfacing,2,-89,1
+Mounting,4,1751,0
+Intake,0,1366,0
+Dispatch,6,1569,0
+Coating,3,1651,0
+Coating,3,1211,0
+QC,5,1218,0
+Delivered,7,0,0
+Delivered,7,0,0
+Delivered,7,0,0
+Delivered,7,0,0
+Delivered,7,0,0
+Mounting,4,1773,0
+Dispatch,6,-69,1
+Stocked at Inventary,1,1378,0
+Mounting,4,1318,0
+Mounting,4,1214,0
+Intake,0,2235,1
+QC,5,2239,0
+Mounting,4,734,0
+Delivered,7,0,0
+Lab Surfacing,2,348,0
+Lab Surfacing,2,2595,0
+Delivered,7,0,0
+Mounting,4,1149,0
+Stocked at Inventary,1,2038,0
+Dispatch,6,1671,0
+Stocked at Inventary,1,2172,0
+Intake,0,262,1
+Lab Surfacing,2,2480,0
+QC,5,2243,0
+Dispatch,6,-83,1
+Coating,3,2857,0
+Dispatch,6,1428,0
+Lab Surfacing,2,1911,0
+Stocked at Inventary,1,734,0
+Mounting,4,1062,0
+Stocked at Inventary,1,1579,0
+Coating,3,1558,0
+Stocked at Inventary,1,1843,0
+Mounting,4,962,0
+Lab Surfacing,2,1994,0
+Delivered,7,0,0
+Stocked at Inventary,1,1373,0
+Intake,0,1524,0
+Mounting,4,2559,0
+Intake,0,2093,1
+Mounting,4,1000,0
+Stocked at Inventary,1,275,0
+Mounting,4,2477,1
+Coating,3,2724,0
+QC,5,2619,0
+Mounting,4,1969,0
+Intake,0,982,0
+Intake,0,1590,0
+Mounting,4,2656,0
+Mounting,4,-10,1
+Lab Surfacing,2,224,0
+Intake,0,19,1
+QC,5,2803,0
+Coating,3,535,0
+Dispatch,6,2408,0
+QC,5,1633,0
+Dispatch,6,2651,0
+Coating,3,1382,0
+Stocked at Inventary,1,2274,0
+QC,5,272,1
+QC,5,1544,0
+Delivered,7,0,0
+Dispatch,6,879,0
+Dispatch,6,23,0
+Dispatch,6,916,0
+Coating,3,1062,1
+Delivered,7,0,0
+Coating,3,345,0
+QC,5,692,0
+Dispatch,6,632,0
+Dispatch,6,-84,1
+Dispatch,6,1108,0
+Intake,0,2051,0
+Intake,0,2234,0
+QC,5,1873,0
+Lab Surfacing,2,2121,1
+Lab Surfacing,2,2479,0
+Mounting,4,2235,0
+Lab Surfacing,2,691,0
+QC,5,2453,0
+Dispatch,6,1402,0
+Intake,0,2757,0
+Delivered,7,0,0
+Lab Surfacing,2,842,0
+Coating,3,96,0
+Dispatch,6,2347,0
+Lab Surfacing,2,1931,0
+Coating,3,2337,0
+Delivered,7,0,0
+Lab Surfacing,2,2528,0
+QC,5,2788,0
+Stocked at Inventary,1,1479,0
+Stocked at Inventary,1,1391,0
+Stocked at Inventary,1,2130,0
+Dispatch,6,506,0
+Dispatch,6,2199,0
+Stocked at Inventary,1,1508,0
+Lab Surfacing,2,2708,0
+Lab Surfacing,2,718,1
+QC,5,1944,0
+Intake,0,1590,1
+QC,5,1575,0
+Delivered,7,0,0
+Mounting,4,1426,0
+Stocked at Inventary,1,585,0
+Lab Surfacing,2,1386,1
+Delivered,7,0,0
+Coating,3,1757,0
+Coating,3,74,1
+Delivered,7,0,0
+Delivered,7,0,0
+Mounting,4,2619,1
+Mounting,4,97,0
+QC,5,535,0
+Delivered,7,0,0
+Dispatch,6,2525,0
+Coating,3,1699,0
+Lab Surfacing,2,570,0
+QC,5,27,0
+Coating,3,1019,0
+Mounting,4,1481,1
+Delivered,7,0,0
+Mounting,4,263,0
+Dispatch,6,1221,0
+Delivered,7,0,0
+QC,5,2068,0
+QC,5,2775,0
+Dispatch,6,1113,0
+Dispatch,6,2632,0
+Coating,3,2435,0
+Delivered,7,0,0
+Intake,0,2516,0
+Lab Surfacing,2,2221,0
+Lab Surfacing,2,1510,0
+Delivered,7,0,0
+Lab Surfacing,2,990,0
+Intake,0,1359,0
+Delivered,7,0,0
+Mounting,4,1000,0
+Intake,0,790,0
+Stocked at Inventary,1,791,0
+Dispatch,6,2108,0
+Delivered,7,0,0
+Lab Surfacing,2,313,0
+Dispatch,6,1074,0
+Mounting,4,2456,0
+Coating,3,2162,0
+Mounting,4,297,0
+Coating,3,1322,0
+Delivered,7,0,0
+QC,5,2245,0
+Lab Surfacing,2,22,1
+Stocked at Inventary,1,-116,1
+Lab Surfacing,2,-11,1
+Delivered,7,0,0
+Lab Surfacing,2,1507,0
+Delivered,7,0,0
+Mounting,4,123,0
+QC,5,2866,1
+QC,5,2801,0
+Intake,0,2550,0
+Lab Surfacing,2,1770,0
+Intake,0,2878,0
+Mounting,4,115,0
+Intake,0,2326,0
+Stocked at Inventary,1,1792,0
+Delivered,7,0,0
+Coating,3,456,0
+Intake,0,2850,0
+Coating,3,2002,0
+Lab Surfacing,2,441,0
+Delivered,7,0,0
+QC,5,362,0
+Delivered,7,0,0
+Intake,0,2467,0
+Mounting,4,131,0
+Lab Surfacing,2,427,0
+Coating,3,1383,0
+Stocked at Inventary,1,1830,0
+Delivered,7,0,0
+Delivered,7,0,0
+Dispatch,6,1871,0
+Delivered,7,0,0
+Coating,3,1686,0
+Delivered,7,0,0
+Mounting,4,824,0
+Intake,0,2757,1
+Coating,3,31,1
+Stocked at Inventary,1,118,1
+Delivered,7,0,0
+QC,5,2084,0
+Dispatch,6,2136,0
+Coating,3,2620,0
+Coating,3,2826,0
+Intake,0,916,0
+Delivered,7,0,0
+Dispatch,6,608,0
+Lab Surfacing,2,694,0
+QC,5,1218,0
+Delivered,7,0,0
+Intake,0,2504,0
+Delivered,7,0,0
+Intake,0,2160,0
+Delivered,7,0,0
+Lab Surfacing,2,348,1
+Mounting,4,868,0
+Dispatch,6,280,1
+Lab Surfacing,2,497,0
+Intake,0,202,1
+Stocked at Inventary,1,1533,0
+Mounting,4,937,0
+Intake,0,1703,0
+Coating,3,1155,0
+Stocked at Inventary,1,2818,0
+Coating,3,2533,0
+QC,5,1718,0
+Dispatch,6,280,0
+QC,5,-10,1
+Dispatch,6,352,0
+Stocked at Inventary,1,2668,1
+Intake,0,1878,0
+Delivered,7,0,0
+QC,5,1610,0
+Mounting,4,1691,0
+Dispatch,6,489,0
+Dispatch,6,210,0
+Dispatch,6,747,0
+QC,5,1470,0
+Stocked at Inventary,1,558,0
+QC,5,894,0
+QC,5,-58,1
+Intake,0,1303,0
+Dispatch,6,2822,0
+Coating,3,2230,0
+Dispatch,6,2061,0
+QC,5,502,1
+QC,5,880,0
+Lab Surfacing,2,1630,0
+QC,5,2658,0
+Lab Surfacing,2,1935,0
+Intake,0,1587,0
+QC,5,722,0
+Stocked at Inventary,1,1699,0
+Lab Surfacing,2,1098,0
+QC,5,2547,0
+Delivered,7,0,0
+Coating,3,1487,0
+Dispatch,6,246,0
+Delivered,7,0,0
+Mounting,4,1824,0
+Intake,0,82,1
+Lab Surfacing,2,1282,0
+Stocked at Inventary,1,92,0
+Lab Surfacing,2,646,0
+Lab Surfacing,2,61,0
+QC,5,474,0
+Mounting,4,777,0
+Stocked at Inventary,1,1450,0
+QC,5,2533,1
+Mounting,4,73,1
+Dispatch,6,2441,0
+Mounting,4,2797,0
+QC,5,2030,0
+Stocked at Inventary,1,1883,0
+Delivered,7,0,0
+Mounting,4,228,0
+Stocked at Inventary,1,2149,0
+Intake,0,27,1
+Mounting,4,2158,0
+Coating,3,493,0
+Lab Surfacing,2,2442,0
+Lab Surfacing,2,1341,0
+QC,5,2252,0
+Delivered,7,0,0
+Intake,0,252,1
+Stocked at Inventary,1,829,0
+Delivered,7,0,0
+Delivered,7,0,0
+QC,5,1969,0
+Mounting,4,2280,0
+Dispatch,6,703,0
+Stocked at Inventary,1,112,0
+QC,5,1209,0
+Stocked at Inventary,1,2211,0
+Coating,3,-104,1
+Lab Surfacing,2,508,0
+Dispatch,6,681,0
+Lab Surfacing,2,2213,0
+Mounting,4,2350,0
+Intake,0,2054,0
+Stocked at Inventary,1,2236,0
+Mounting,4,646,0
+Delivered,7,0,0
+Dispatch,6,1806,0
+QC,5,1227,1
+Delivered,7,0,0
+Stocked at Inventary,1,2399,0
+Coating,3,2378,0
+Mounting,4,1702,0
+Dispatch,6,2184,0
+Dispatch,6,194,0
+Coating,3,764,0
+Mounting,4,2281,0
+Stocked at Inventary,1,1066,0
+Coating,3,155,1
+QC,5,2481,0
+QC,5,1647,0
+QC,5,2801,0
+Dispatch,6,481,0
+Coating,3,1250,0
+Delivered,7,0,0
+Lab Surfacing,2,2370,0
+Lab Surfacing,2,278,0
+Dispatch,6,1378,0
+Mounting,4,120,0
+QC,5,2594,0
+Delivered,7,0,0
+Dispatch,6,2678,0
+Coating,3,1434,0
+Lab Surfacing,2,265,0
+Stocked at Inventary,1,2128,1
+Delivered,7,0,0
+Intake,0,1197,1
+Stocked at Inventary,1,2270,0
+Delivered,7,0,0
+Coating,3,2565,1
+Mounting,4,2698,0
+QC,5,2642,0
+Coating,3,728,0
+Lab Surfacing,2,2806,0
+Mounting,4,2564,0
+Intake,0,541,0
+Dispatch,6,760,0
+Mounting,4,-57,1
+Delivered,7,0,0
+QC,5,2623,1
+Coating,3,2552,0
+Lab Surfacing,2,2017,0
+Mounting,4,1177,1
+Coating,3,1571,0
+Lab Surfacing,2,987,0
+Mounting,4,459,0
+Mounting,4,2200,0
+Lab Surfacing,2,2434,0
+Lab Surfacing,2,856,0
+QC,5,2548,0
+Lab Surfacing,2,2852,0
+Stocked at Inventary,1,1316,0
+Mounting,4,18,0
+Intake,0,2401,0
+Mounting,4,515,0
+QC,5,679,0
+Delivered,7,0,0
+Delivered,7,0,0
+Lab Surfacing,2,1247,0
+QC,5,1663,0
+Stocked at Inventary,1,1341,1
+Lab Surfacing,2,935,0
+Delivered,7,0,0
+QC,5,594,0
+Delivered,7,0,0
+Lab Surfacing,2,2692,0
+Mounting,4,419,0
+QC,5,1132,0
+Delivered,7,0,0
+Delivered,7,0,0
+Intake,0,2318,0
+Dispatch,6,697,0
+Stocked at Inventary,1,-106,1
+Dispatch,6,1785,0
+Intake,0,1301,0
+Stocked at Inventary,1,2464,0
+Intake,0,1904,0
+Intake,0,431,1
+Stocked at Inventary,1,2452,0
+Mounting,4,2544,0
+Delivered,7,0,0
+Stocked at Inventary,1,-84,1
+Delivered,7,0,0
+Stocked at Inventary,1,485,0
+Dispatch,6,698,0
+Stocked at Inventary,1,576,0
+Dispatch,6,-1,1
+QC,5,311,0

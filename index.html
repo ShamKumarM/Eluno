@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eluno AI // Order Lifecycle Management Hub</title>
+  <!-- Google Fonts: Orbitron for futuristic headers, Inter for clean UI -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Lucide Icons for futuristic UI elements -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Three.js for 3D visualizers -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- Supabase JS Client SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- Canvas-confetti for successes -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="styles_orange.css">
+  <style>
+    /* Hide body initially to prevent Flash of Unauthenticated Content (FOUC) */
+    body { display: none; }
+  </style>
+</head>
+<body class="light-theme portal-state">
+  <!-- 3D Canvas Background -->
+  <canvas id="bg-3d-canvas"></canvas>
+
+  <div class="app-container">
+    <!-- Top Navbar Navigation -->
+    <header class="navbar">
+      <div class="navbar-left">
+        <div class="navbar-logo">
+          <div class="logo-orange-glow"></div>
+          <span class="logo-text">ELUNO<span class="logo-sub">AI</span></span>
+        </div>
+        <div class="system-status">
+          <span class="pulse-dot"></span>
+          <span class="status-lbl">AI Core Active</span>
+        </div>
+      </div>
+      
+      <nav class="nav-menu">
+        <button class="nav-btn" data-tab="home">
+          <i data-lucide="home"></i>
+          <span>Home</span>
+        </button>
+        <button class="nav-btn" data-tab="dashboard">
+          <i data-lucide="layout-dashboard"></i>
+          <span>Dashboard</span>
+        </button>
+        <button class="nav-btn" data-tab="orders">
+          <i data-lucide="package"></i>
+          <span>Order Console</span>
+        </button>
+        <button class="nav-btn" data-tab="inventory">
+          <i data-lucide="layers"></i>
+          <span>Lens Inventory</span>
+        </button>
+        <button class="nav-btn" data-tab="predictions">
+          <i data-lucide="brain-circuit"></i>
+          <span>TAT Predictions</span>
+          <span class="badge badge-risk" id="risk-badge-count">2</span>
+        </button>
+        <button class="nav-btn" data-tab="place-order">
+          <i data-lucide="plus-circle"></i>
+          <span>Place Order</span>
+        </button>
+      </nav>
+
+      <div class="navbar-right">
+        <div class="active-user">
+          <div class="avatar" id="header-user-avatar">OPS</div>
+          <div class="user-details">
+            <p class="user-name" id="header-user-name">Central Ops</p>
+            <p class="user-role" id="header-user-role">Administrator</p>
+          </div>
+          <button class="nav-btn" id="btn-logout" title="Log Out" style="padding: 8px; margin-left: 8px; border: 1px solid var(--border-white-low); border-radius: 6px; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: var(--transition-fast);">
+            <i data-lucide="log-out" style="width: 16px; height: 16px; color: var(--color-danger);"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Top Header -->
+      <header class="top-header">
+        <div class="page-title-area">
+          <h1 id="current-tab-title">Operations Control Center</h1>
+          <p class="subtitle" id="current-tab-subtitle">Real-time status overview & AI-driven bottleneck predictions</p>
+        </div>
+        <div class="header-actions">
+          <div class="quick-stat-box">
+            <span class="label">SLA HEALTH</span>
+            <span class="val success-text">94.2%</span>
+          </div>
+          <div class="quick-stat-box">
+            <span class="label">ACTIVE BREACH RISKS</span>
+            <span class="val alert-text" id="header-risk-count">2</span>
+          </div>
+          <div class="live-clock" id="live-clock">18:14:46</div>
+        </div>
+      </header>
+
+      <!-- TAB 0: HOME PORTAL SELECTOR -->
+      <section class="tab-content active" id="home-tab">
+        <!-- Scroll-controlled sequence wrapper -->
+        <div class="home-scroll-wrapper" id="home-scroll-wrapper">
+          <div class="sticky-animation-container">
+            <!-- Apple-style canvas -->
+            <canvas id="animation-canvas"></canvas>
+          </div>
+
+          <!-- Scrolling text layers -->
+          <div class="scroll-text-overlay-wrapper">
+            <!-- Scroll Overlay Stage 1: Welcome -->
+            <div class="scroll-text-section" id="overlay-stage-1">
+              <div class="overlay-card">
+                <h1>WELCOME TO</h1>
+                <h2>ELUNO</h2>
+                <p>
+                  Fine Eyewear. Designed for uniqueness. Crafted with superior materials. Access the operations control panel or place a new order below.
+                </p>
+                <button class="btn btn-orange" onclick="switchTab('place-order')" style="padding: 14px 32px; font-size: 15px; font-weight: 600; border-radius: 8px; display: flex; align-items: center; gap: 8px; box-shadow: var(--shadow-orange-glow); cursor: pointer;">
+                  <i data-lucide="plus-circle" style="width: 20px; height: 20px;"></i> Place Order
+                </button>
+              </div>
+            </div>
+
+            <!-- Scroll Overlay Stage 2: Craftsmanship -->
+            <div class="scroll-text-section" id="overlay-stage-2">
+              <div class="overlay-card">
+                <h1>DESIGNED FOR</h1>
+                <h2>UNIQUENESS</h2>
+                <p>
+                  Every frame is meticulously studied by our stylists, chosen for its proportion, silhouette, and distinct identity. Crafted to endure the test of time.
+                </p>
+              </div>
+            </div>
+
+            <!-- Scroll Overlay Stage 3: Operation Control -->
+            <div class="scroll-text-section" id="overlay-stage-3">
+              <div class="overlay-card">
+                <h1>INTELLIGENT</h1>
+                <h2>FORECASTING</h2>
+                <p>
+                  Powered by custom Random Forest and Poisson models. Instantly calculates demand patterns, stockout probabilities, and automates supplier sourcing recommendations.
+                </p>
+                <button class="btn btn-orange" onclick="switchTab('dashboard')" style="padding: 14px 32px; font-size: 15px; font-weight: 600; border-radius: 8px; display: flex; align-items: center; gap: 8px; box-shadow: var(--shadow-orange-glow); cursor: pointer;">
+                  <i data-lucide="layout-dashboard" style="width: 20px; height: 20px;"></i> Operations Console
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Solid Content below the scroll wrapper -->
+        <div class="home-solid-content">
+          <div class="home-solid-container">
+            
+            <!-- Features Grid -->
+            <div class="section-header-center">
+              <h3>Exceptional Eyewear, Engineered</h3>
+              <p>Eluno blends traditional Italian craftsmanship with modern materials and scientific precision.</p>
+            </div>
+
+            <div class="features-grid">
+              <div class="feature-item-card">
+                <div class="feature-icon-box">
+                  <i data-lucide="compass"></i>
+                </div>
+                <h4>Curated Design</h4>
+                <p>Every frame is meticulously studied by our stylists, chosen for its proportion, silhouette, and distinct identity.</p>
+              </div>
+
+              <div class="feature-item-card">
+                <div class="feature-icon-box">
+                  <i data-lucide="activity"></i>
+                </div>
+                <h4>Tested To Endure</h4>
+                <p>Frames undergo exhaustive tests and multi-stage inspections, ensuring every detail meets the highest standard of enduring craftsmanship.</p>
+              </div>
+
+              <div class="feature-item-card">
+                <div class="feature-icon-box">
+                  <i data-lucide="smile"></i>
+                </div>
+                <h4>Designed For Comfort</h4>
+                <p>Precision-tuned hinges and soft nose pads—engineered for comfort, weight distribution, and effortless balance.</p>
+              </div>
+
+              <div class="feature-item-card">
+                <div class="feature-icon-box">
+                  <i data-lucide="gem"></i>
+                </div>
+                <h4>Material Mastery</h4>
+                <p>Every frame begins with material mastery — from sculpted bio-acetate to refined titanium, enduring steel to adaptive TR90.</p>
+              </div>
+            </div>
+
+            <!-- Blogs & News Section -->
+            <div class="section-header-center">
+              <h3>Eluno Journal</h3>
+              <p>Insights on optical health, daily eyewear selection, comfort, and premium craftsmanship.</p>
+            </div>
+
+            <div class="blogs-grid">
+              
+              <!-- Blog 1 -->
+              <div class="blog-card">
+                <div class="blog-image-placeholder">
+                  <i data-lucide="book-open"></i>
+                </div>
+                <div class="blog-content">
+                  <span class="blog-date">June 13, 2026</span>
+                  <h5>How to Choose Everyday Glasses for Maximum Comfort</h5>
+                  <p>Finding the perfect pair of daily glasses relies heavily on optical ergonomics. Learn how weight, frame width, and nose pad alignment affect all-day wearability.</p>
+                  <a href="https://eluno.co/blogs/news/how-to-choose-everyday-glasses-for-maximum-comfort" target="_blank" class="blog-more-btn">
+                    Read Article <i data-lucide="arrow-up-right" style="width: 14px; height: 14px;"></i>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Blog 2 -->
+              <div class="blog-card">
+                <div class="blog-image-placeholder">
+                  <i data-lucide="glasses"></i>
+                </div>
+                <div class="blog-content">
+                  <span class="blog-date">June 13, 2026</span>
+                  <h5>Best Eyeglasses for Daily Wear in India 2026</h5>
+                  <p>A comprehensive review of the top daily wear frame designs, balancing robust materials like beta-titanium and lightweight stainless steel for the warm climate.</p>
+                  <a href="https://eluno.co/blogs/news/best-eyeglasses-for-daily-wear-in-india-2026" target="_blank" class="blog-more-btn">
+                    Read Article <i data-lucide="arrow-up-right" style="width: 14px; height: 14px;"></i>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Blog 3 -->
+              <div class="blog-card">
+                <div class="blog-image-placeholder">
+                  <i data-lucide="sun"></i>
+                </div>
+                <div class="blog-content">
+                  <span class="blog-date">June 13, 2026</span>
+                  <h5>Everyday Sunglasses for Daily Commuters</h5>
+                  <p>Commuting through vibrant yet chaotic Indian metros requires premium polarization and anti-glare coatings to prevent premature eye fatigue.</p>
+                  <a href="https://eluno.co/blogs/news/best-everyday-sunglasses-for-indian-daily-commuters" target="_blank" class="blog-more-btn">
+                    Read Article <i data-lucide="arrow-up-right" style="width: 14px; height: 14px;"></i>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Blog 4 -->
+              <div class="blog-card">
+                <div class="blog-image-placeholder">
+                  <i data-lucide="alert-triangle"></i>
+                </div>
+                <div class="blog-content">
+                  <span class="blog-date">June 12, 2026</span>
+                  <h5>The Hidden Cost of Bad-Quality Eyeglasses</h5>
+                  <p>Why premium optics matter. Mass-market eyewear might seem budget-friendly initially, but poor alignment and low lens clarity carry steep long-term costs.</p>
+                  <a href="https://eluno.co/blogs/news/the-hidden-cost-of-bad-quality-eyeglasses" target="_blank" class="blog-more-btn">
+                    Read Article <i data-lucide="arrow-up-right" style="width: 14px; height: 14px;"></i>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Blog 5 -->
+              <div class="blog-card">
+                <div class="blog-image-placeholder">
+                  <i data-lucide="video"></i>
+                </div>
+                <div class="blog-content">
+                  <span class="blog-date">June 12, 2026</span>
+                  <h5>Best Eyewear for Video Calls and Remote Work</h5>
+                  <p>For modern professionals, selecting blue-light filtering lenses with anti-reflective properties ensures sharp vision and premium video presentation.</p>
+                  <a href="https://eluno.co/blogs/news/best-eyewear-for-video-calls-and-remote-work-appearance" target="_blank" class="blog-more-btn">
+                    Read Article <i data-lucide="arrow-up-right" style="width: 14px; height: 14px;"></i>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Blog 6 -->
+              <div class="blog-card">
+                <div class="blog-image-placeholder">
+                  <i data-lucide="eye"></i>
+                </div>
+                <div class="blog-content">
+                  <span class="blog-date">June 12, 2026</span>
+                  <h5>Why Local Sunglasses Cause Eye Fatigue</h5>
+                  <p>Value-driven fashion sunglasses often skip UV400 certification and use distorted lenses. Uncover the optical truths causing faster squinting and fatigue.</p>
+                  <a href="https://eluno.co/blogs/news/why-local-sunglasses-cause-faster-eye-fatigue" target="_blank" class="blog-more-btn">
+                    Read Article <i data-lucide="arrow-up-right" style="width: 14px; height: 14px;"></i>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="home-footer">
+          <div class="footer-grid">
+            <div class="footer-brand">
+              <h4>ELUNO</h4>
+              <p>Fine Eyewear. Designed for uniqueness. Crafted with superior materials. Built to frame your every moment.</p>
+              <p style="margin-top: 16px; font-size: 12px; color: #4b5563;">
+                Operational Support: <a href="mailto:care@eluno.co" style="color: var(--orange-primary); text-decoration: none;">care@eluno.co</a>
+              </p>
+            </div>
+            <div class="footer-col">
+              <h5>Help & Support</h5>
+              <ul class="footer-links">
+                <li><a href="https://eluno.co/pages/contact-us" target="_blank">Contact Us</a></li>
+                <li><a href="https://eluno.co/pages/terms-and-conditions" target="_blank">Terms & Conditions</a></li>
+                <li><a href="https://eluno.co/pages/privacy-policy" target="_blank">Privacy Policy</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h5>Quick Actions</h5>
+              <ul class="footer-links">
+                <li><a href="#" onclick="switchTab('place-order'); return false;">Place New Order</a></li>
+                <li><a href="#" onclick="switchTab('dashboard'); return false;">Management Console</a></li>
+                <li><a href="#" onclick="switchTab('inventory'); return false;">Inventory Levels</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <p>&copy; 2026 ELUNO Eyewear. All rights reserved.</p>
+            <p>Designed for excellence.</p>
+          </div>
+        </footer>
+      </section>
+
+      <!-- TAB 1: DASHBOARD -->
+      <section class="tab-content" id="dashboard-tab">
+        <!-- Dashboard Summary Grid -->
+        <div class="grid-layout cols-4">
+          <div class="card stat-card orange-border-hover">
+            <div class="card-glow"></div>
+            <div class="stat-header">
+              <span class="stat-title">Active Orders</span>
+              <div class="stat-icon-wrapper"><i data-lucide="shopping-bag" class="orange-icon"></i></div>
+            </div>
+            <div class="stat-value" id="dashboard-active-count">48</div>
+            <div class="stat-footer">
+              <span class="trend positive"><i data-lucide="trending-up"></i> +12.4%</span>
+              <span class="footer-lbl">vs yesterday</span>
+            </div>
+          </div>
+
+          <div class="card stat-card orange-border-hover">
+            <div class="card-glow"></div>
+            <div class="stat-header">
+              <span class="stat-title">At SLA Risk</span>
+              <div class="stat-icon-wrapper"><i data-lucide="alert-triangle" class="risk-icon"></i></div>
+            </div>
+            <div class="stat-value alert-text" id="dashboard-risk-count">3</div>
+            <div class="stat-footer">
+              <span class="trend negative"><i data-lucide="trending-down"></i> High Risk</span>
+              <span class="footer-lbl">needs attention</span>
+            </div>
+          </div>
+
+          <div class="card stat-card orange-border-hover">
+            <div class="card-glow"></div>
+            <div class="stat-header">
+              <span class="stat-title">Lab Processing</span>
+              <div class="stat-icon-wrapper"><i data-lucide="cpu" class="orange-icon"></i></div>
+            </div>
+            <div class="stat-value" id="dashboard-lab-count">19</div>
+            <div class="stat-footer">
+              <span class="trend neutral">Steady</span>
+              <span class="footer-lbl">surfacing queue</span>
+            </div>
+          </div>
+
+          <div class="card stat-card orange-border-hover">
+            <div class="card-glow"></div>
+            <div class="stat-header">
+              <span class="stat-title">QC Success Rate</span>
+              <div class="stat-icon-wrapper"><i data-lucide="shield-check" class="success-icon"></i></div>
+            </div>
+            <div class="stat-value success-text">96.8%</div>
+            <div class="stat-footer">
+              <span class="trend positive"><i data-lucide="trending-up"></i> +1.2%</span>
+              <span class="footer-lbl">re-order loop reduced</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3D Visualization & Active Pipeline Row -->
+        <div class="grid-layout cols-3 gap-24 mt-24">
+          <!-- 3D Lens Configurator Preview Card (Interactive 3D model) -->
+          <div class="card col-span-1 min-height-350 orange-border-hover interactive-3d-card">
+            <div class="card-glow"></div>
+            <h3>3D Lens Material Visualizer</h3>
+            <p class="section-desc">Interactive viewport of optical refractivity index & coating thickness</p>
+            <div class="canvas-3d-container">
+              <!-- ThreeJS Canvas for lens visualization -->
+              <div id="lens-3d-viewport"></div>
+              <div class="lens-visualizer-controls">
+                <span class="control-indicator">INDEX: 1.67</span>
+                <span class="control-indicator">COATING: BLUE SHIELD</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Active SLA Pipeline Status Overview -->
+          <div class="card col-span-2 orange-border-hover">
+            <div class="card-glow"></div>
+            <div class="card-header-flex">
+              <div>
+                <h3>Order Lifecycle Pipeline</h3>
+                <p class="section-desc">Current queue distribution across primary stages</p>
+              </div>
+              <button class="action-btn text-orange" id="refresh-pipeline-btn">
+                <i data-lucide="refresh-cw"></i> Sync Status
+              </button>
+            </div>
+
+            <!-- Horizontal pipeline nodes -->
+            <div class="horizontal-pipeline mt-24">
+              <div class="pipeline-node active" data-stage="Intake">
+                <div class="node-icon"><i data-lucide="file-input"></i></div>
+                <div class="node-info">
+                  <span class="node-title">Intake</span>
+                  <span class="node-count" id="count-stage-intake">5</span>
+                </div>
+              </div>
+              <div class="pipeline-connector active"></div>
+              
+              <div class="pipeline-node active" data-stage="Stocked at Inventary">
+                <div class="node-icon"><i data-lucide="archive"></i></div>
+                <div class="node-info">
+                  <span class="node-title">Stocking</span>
+                  <span class="node-count" id="count-stage-stocked-at-inventary">0</span>
+                </div>
+              </div>
+              <div class="pipeline-connector active"></div>
+              
+              <div class="pipeline-node active" data-stage="Lab Surfacing">
+                <div class="node-icon"><i data-lucide="drill"></i></div>
+                <div class="node-info">
+                  <span class="node-title">Surfacing</span>
+                  <span class="node-count" id="count-stage-surfacing">8</span>
+                </div>
+              </div>
+              <div class="pipeline-connector active"></div>
+
+              <div class="pipeline-node active" data-stage="Coating">
+                <div class="node-icon"><i data-lucide="layers"></i></div>
+                <div class="node-info">
+                  <span class="node-title">Coating</span>
+                  <span class="node-count" id="count-stage-coating">7</span>
+                </div>
+              </div>
+              <div class="pipeline-connector"></div>
+
+              <div class="pipeline-node" data-stage="Mounting">
+                <div class="node-icon"><i data-lucide="frame"></i></div>
+                <div class="node-info">
+                  <span class="node-title">Mounting</span>
+                  <span class="node-count" id="count-stage-mounting">4</span>
+                </div>
+              </div>
+              <div class="pipeline-connector"></div>
+
+              <div class="pipeline-node" data-stage="QC">
+                <div class="node-icon"><i data-lucide="shield-alert"></i></div>
+                <div class="node-info">
+                  <span class="node-title">QC Check</span>
+                  <span class="node-count" id="count-stage-qc">3</span>
+                </div>
+              </div>
+              <div class="pipeline-connector"></div>
+
+              <div class="pipeline-node" data-stage="Dispatch">
+                <div class="node-icon"><i data-lucide="truck"></i></div>
+                <div class="node-info">
+                  <span class="node-title">Dispatch</span>
+                  <span class="node-count" id="count-stage-dispatch">11</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pipeline Metrics & AI Insights -->
+            <div class="pipeline-insights mt-32">
+              <div class="insight-box alert-border-left">
+                <i data-lucide="sparkles" class="ai-sparkle"></i>
+                <div class="insight-text">
+                  <strong>AI Engine Alert:</strong> Laboratory backlog detected at the <strong>Coating Stage</strong>. Lens Index 1.74 SLA is predicted to drop by 8% in the next 4 hours. Recommend redirecting offline store capacity.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Activity Logs and SLA Breaches panel -->
+        <div class="grid-layout cols-3 gap-24 mt-24">
+          <!-- Critical Breaches list -->
+          <div class="card col-span-2 orange-border-hover">
+            <div class="card-glow"></div>
+            <h3>Immediate Attention: Impending SLA Breaches</h3>
+            <p class="section-desc">Orders calculated with highest probability of missing target timeline</p>
+            <div class="breach-list mt-16" id="critical-breach-list">
+              <!-- Dynamically populated via app.js -->
+            </div>
+          </div>
+
+          <!-- Store performance list -->
+          <div class="card col-span-1 orange-border-hover">
+            <div class="card-glow"></div>
+            <h3>Store Intake Performance</h3>
+            <div class="store-stats-list mt-16">
+              <div class="store-stat-row">
+                <span class="store-name">Eluno Flagship (Indiranagar)</span>
+                <span class="store-volume">24 Orders</span>
+                <div class="mini-bar-container"><div class="mini-bar orange-fill" style="width: 85%;"></div></div>
+              </div>
+              <div class="store-stat-row">
+                <span class="store-name">Eluno Store (Jayanagar)</span>
+                <span class="store-volume">15 Orders</span>
+                <div class="mini-bar-container"><div class="mini-bar orange-fill" style="width: 60%;"></div></div>
+              </div>
+              <div class="store-stat-row">
+                <span class="store-name">Eluno Store (Koramangala)</span>
+                <span class="store-volume">9 Orders</span>
+                <div class="mini-bar-container"><div class="mini-bar orange-fill" style="width: 38%;"></div></div>
+              </div>
+          </div>
+        </div>
+      </div>
+
+
+      </section>
+
+      <!-- TAB 2: ORDER CONSOLE -->
+      <section class="tab-content" id="orders-tab">
+        <div class="card orange-border-hover">
+          <div class="card-glow"></div>
+          <div class="console-controls">
+            <!-- Search & Filters -->
+            <div class="filter-row">
+              <div class="search-input-wrapper">
+                <i data-lucide="search" class="search-icon"></i>
+                <input type="text" id="order-search" placeholder="Search by Order ID, Patient Name or Frame..." class="form-input">
+              </div>
+              
+              <div class="filter-group">
+                <select id="filter-status" class="form-select">
+                  <option value="all">All Stages</option>
+                  <option value="Intake">Intake</option>
+                  <option value="Stocked at Inventary">Stocked at Inventary</option>
+                  <option value="Lab Surfacing">Lab Surfacing</option>
+                  <option value="Coating">Coating</option>
+                  <option value="Mounting">Mounting</option>
+                  <option value="QC">QC Pass/Fail</option>
+                  <option value="Dispatch">Dispatch</option>
+                  <option value="Delivered">Delivered</option>
+                </select>
+
+                <select id="filter-lens-type" class="form-select">
+                  <option value="all">All Lens Types</option>
+                  <option value="Single Vision">Single Vision</option>
+                  <option value="Bifocal">Bifocal</option>
+                  <option value="Progressive">Progressive (AI Corridor)</option>
+                  <option value="Luminescent">Luminescent</option>
+                </select>
+
+                <select id="filter-location" class="form-select">
+                  <option value="all">All Store Locations</option>
+                  <option value="Indiranagar">Indiranagar (Flagship)</option>
+                  <option value="Jayanagar">Jayanagar</option>
+                  <option value="Koramangala">Koramangala</option>
+                  <option value="Online">Online Portal</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Orders Data Table -->
+          <div class="table-container mt-24">
+            <table class="futuristic-table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer / Patient</th>
+                  <th>Prescription Details</th>
+                  <th>Lens Parameters</th>
+                  <th>Location</th>
+                  <th>SLA Remaining</th>
+                  <th>Breach Risk</th>
+                  <th>Status Stage</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="orders-table-body">
+                <!-- Dynamically filled with interactive items -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 3: LENS INVENTORY -->
+      <section class="tab-content" id="inventory-tab">
+        <div class="grid-layout cols-3 gap-24">
+          <!-- Inventory Analytics & AI Stock Predictor -->
+          <div class="card col-span-2 orange-border-hover">
+            <div class="card-glow"></div>
+            <div class="card-header-flex">
+              <div>
+                <h3>In-House Optical Blanks Stock</h3>
+                <p class="section-desc">Real-time status of index power limits and coatings in internal reserve</p>
+              </div>
+              <div style="display: flex; gap: 12px; align-items: center;">
+                <button class="btn btn-orange" id="btn-open-stock-modal" style="padding: 8px 16px; font-size: 12px;">
+                  <i data-lucide="plus-circle" style="width: 14px; height: 14px;"></i> Feed Stock
+                </button>
+                <span class="status-pill status-success">All Systems Optimal</span>
+              </div>
+            </div>
+
+            <!-- Interactive Search Grid of Stock -->
+            <div class="inventory-search-bar mt-16">
+              <input type="text" id="inventory-search" class="form-input" placeholder="Quick filter by lens index (e.g. 1.67, 1.74) or coating type...">
+            </div>
+
+            <div class="inventory-grid mt-24" id="inventory-grid-container">
+              <!-- Rendered via app.js -->
+            </div>
+          </div>
+
+          <!-- Instant Prescription Inventory Checker -->
+          <div class="card col-span-1 orange-border-hover">
+            <div class="card-glow"></div>
+            <h3>Intake Power Matcher</h3>
+            <p class="section-desc">Instantly match a custom RX prescription to in-house blank inventory to verify SLA viability</p>
+
+            <form id="rx-matcher-form" class="mt-24 form-themed">
+              <div class="form-row">
+                <div class="form-col">
+                  <label class="form-label">Spherical (SPH)</label>
+                  <input type="number" step="0.25" min="-12" max="6" id="rx-sph" value="-2.50" class="form-input">
+                </div>
+                <div class="form-col">
+                  <label class="form-label">Cylinder (CYL)</label>
+                  <input type="number" step="0.25" min="-6" max="0" id="rx-cyl" value="-0.75" class="form-input">
+                </div>
+              </div>
+
+              <div class="form-row mt-16">
+                <div class="form-col">
+                  <label class="form-label">Refractive Index</label>
+                  <select id="rx-index" class="form-select">
+                    <option value="1.50">1.50 Standard CR-39</option>
+                    <option value="1.60">1.60 High Index Thin</option>
+                    <option value="1.67" selected>1.67 Ultra Tough Thin</option>
+                    <option value="1.74">1.74 Thinnest Elite</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row mt-16">
+                <div class="form-col">
+                  <label class="form-label">Preferred Coating</label>
+                  <select id="rx-coating" class="form-select">
+                    <option value="Standard Hard Coat">Standard Hard Coat</option>
+                    <option value="Anti-Glare ARC">Anti-Glare ARC</option>
+                    <option value="Blue Shield Shield" selected>Blue Shield (Anti-Reflective)</option>
+                    <option value="Luminescent Tint">Luminescent Solar Tint</option>
+                  </select>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-orange btn-full mt-24">
+                <i data-lucide="shield-check"></i> Run In-House Inventory Check
+              </button>
+            </form>
+
+            <div class="match-result-box mt-24 hidden" id="rx-match-result">
+              <!-- Generated matching message -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 4: TAT PREDICTIONS & ALERTS -->
+      <section class="tab-content" id="predictions-tab">
+        <div class="grid-layout cols-3 gap-24">
+          <!-- ML Model Info Panel -->
+          <div class="card col-span-1 orange-border-hover">
+            <div class="card-glow"></div>
+            <h3>Eluno AI SLA Predictor</h3>
+            <p class="section-desc">Powered by historical turnaround time analysis & technician workload models</p>
+
+            <div class="tat-stat-grid mt-24">
+              <div class="tat-stat">
+                <span class="label">Historical SLA Met</span>
+                <span class="val success-text">98.2%</span>
+              </div>
+              <div class="tat-stat">
+                <span class="label">Training Epochs</span>
+                <span class="val text-orange">v2.4.1 (Daily Update)</span>
+              </div>
+              <div class="tat-stat">
+                <span class="label">Mean Error Margin</span>
+                <span class="val">± 12 Minutes</span>
+              </div>
+            </div>
+
+            <div class="ai-confidence-chart-placeholder mt-32">
+              <div class="chart-header">
+                <span>Model Confidence</span>
+                <span class="percentage">94%</span>
+              </div>
+              <div class="confidence-bar-wrapper">
+                <div class="confidence-bar-fill orange-fill" style="width: 94%;"></div>
+              </div>
+              <p class="chart-sub-text">Confidence reduces when surfacing complex double-bifocals under low store capacities</p>
+            </div>
+          </div>
+
+          <!-- Active Predictive Risks & Communication Panel -->
+          <div class="card col-span-2 orange-border-hover">
+            <div class="card-glow"></div>
+            <div class="card-header-flex">
+              <div>
+                <h3>At-Risk Turnaround Times</h3>
+                <p class="section-desc">Real-time alerts for orders heading towards breach unless fast-tracked</p>
+              </div>
+              <span class="status-pill status-danger">Action Required</span>
+            </div>
+
+            <div class="predictions-panel-list mt-24" id="predictions-risk-list">
+              <!-- Items loaded via app.js -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 5: PLACE ORDER -->
+      <section class="tab-content" id="place-order-tab">
+        <div class="card" style="max-width: 600px; margin: 0 auto; padding: 32px; position: relative;">
+          <div class="card-glow" style="background: radial-gradient(circle, var(--orange-glow) 0%, transparent 70%);"></div>
+          <h2 style="font-family: var(--font-header); font-size: 24px; color: var(--text-primary); margin-bottom: 8px;">Place New Order</h2>
+          <p style="color: var(--text-secondary); font-size: 13px; margin-bottom: 24px;">Register a new customer prescription order into the manufacturing pipeline.</p>
+          
+          <form id="place-order-form" class="form-themed">
+            <div class="form-row">
+              <div class="form-col">
+                <label class="form-label" for="order-patient-name">Patient Name</label>
+                <input type="text" id="order-patient-name" class="form-input" placeholder="e.g. Vikram Malhotra" required>
+              </div>
+              <div class="form-col">
+                <label class="form-label" for="order-patient-email">Patient Email</label>
+                <input type="email" id="order-patient-email" class="form-input" placeholder="e.g. yourname@domain.com" required>
+              </div>
+            </div>
+
+            <div class="form-row mt-16">
+              <div class="form-col">
+                <label class="form-label" for="order-sph">Sphere SPH (e.g. -4.50)</label>
+                <input type="text" id="order-sph" class="form-input" placeholder="-4.50" required>
+              </div>
+              <div class="form-col">
+                <label class="form-label" for="order-cyl">Cylinder CYL (e.g. -1.25)</label>
+                <input type="text" id="order-cyl" class="form-input" placeholder="-1.25" required>
+              </div>
+            </div>
+
+            <div class="form-row mt-16">
+              <div class="form-col">
+                <label class="form-label" for="order-lens-type">Lens Type</label>
+                <select id="order-lens-type" class="form-select" style="width: 100%;">
+                  <option value="Single Vision">Single Vision</option>
+                  <option value="Bifocal">Bifocal</option>
+                  <option value="Progressive">Progressive</option>
+                </select>
+              </div>
+              <div class="form-col">
+                <label class="form-label" for="order-index-value">Index Parameter</label>
+                <select id="order-index-value" class="form-select" style="width: 100%;">
+                  <option value="1.50">1.50 Standard</option>
+                  <option value="1.60">1.60 Thin</option>
+                  <option value="1.67">1.67 Extra Thin</option>
+                  <option value="1.74">1.74 Ultra Thin</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row mt-16">
+              <div class="form-col">
+                <label class="form-label" for="order-coating">Coating Option</label>
+                <select id="order-coating" class="form-select" style="width: 100%;">
+                  <option value="Standard Hard Coat">Standard Hard Coat</option>
+                  <option value="Anti-Glare ARC">Anti-Glare ARC</option>
+                  <option value="Blue Shield Shield">Blue Shield Shield</option>
+                  <option value="Luminescent Solar Tint">Luminescent Solar Tint</option>
+                </select>
+              </div>
+              <div class="form-col">
+                <label class="form-label" for="order-store">Dispatching Store Location</label>
+                <select id="order-store" class="form-select" style="width: 100%;">
+                  <option value="Indiranagar">Indiranagar (Flagship)</option>
+                  <option value="Jayanagar">Jayanagar</option>
+                  <option value="Koramangala">Koramangala</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="modal-actions mt-32" style="display: flex; gap: 16px; justify-content: flex-end;">
+              <button type="submit" class="btn btn-orange btn-full" id="btn-place-order-submit" style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+                <i data-lucide="plus-circle"></i> Create Manufacturing Order
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- STATUS UPDATE / DELAY LOGGING MODAL -->
+  <div class="modal-backdrop hidden" id="status-modal">
+    <div class="modal-card">
+      <div class="modal-glow"></div>
+      <div class="modal-header">
+        <h3>Change Stage & Log TAT Parameters</h3>
+        <button class="close-btn" id="close-modal-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-summary">Updating Stage status for: <strong id="modal-order-id" class="text-orange">#EL-0000</strong></p>
+        
+        <form id="status-update-form" class="form-themed">
+          <div class="form-row mt-16">
+            <div class="form-col">
+              <label class="form-label">New Lifecycle Stage</label>
+              <select id="modal-new-status" class="form-select">
+                <option value="Intake">Intake</option>
+                <option value="Stocked at Inventary">Stocked at Inventary</option>
+                <option value="Lab Surfacing">Lab Surfacing</option>
+                <option value="Coating">Coating</option>
+                <option value="Mounting">Mounting</option>
+                <option value="QC">QC Check</option>
+                <option value="Dispatch">Dispatch</option>
+                <option value="Delivered">Delivered</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- QC Specific section, if status = QC -->
+          <div class="form-row mt-16 hidden" id="qc-fail-loop-options">
+            <div class="form-col alert-border-left p-12">
+              <p class="text-danger-strong"><i data-lucide="shield-alert"></i> <strong>Quality Check Loop:</strong></p>
+              <p class="desc text-secondary">Failing QC triggers an immediate automatic re-order loop. Order returns to <strong>Lab Surfacing</strong>.</p>
+              <label class="checkbox-container mt-12">
+                <input type="checkbox" id="qc-failed-checkbox"> Fail QC & Loop Back to Surfacing
+              </label>
+            </div>
+          </div>
+
+          <div class="form-row mt-16" id="delay-reason-container">
+            <div class="form-col">
+              <label class="form-label">Log Delay/Action Log (Required if Status changed or SLA risk exists)</label>
+              <textarea id="modal-delay-reason" class="form-textarea" placeholder="Provide detail (e.g., Blocked on surfacing, lens optical match mismatch, customer change of prescription)"></textarea>
+            </div>
+          </div>
+
+          <div class="modal-actions mt-24">
+            <button type="button" class="btn btn-secondary" id="modal-cancel-btn">Cancel</button>
+            <button type="submit" class="btn btn-orange">Update & Recalculate SLA</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEED STOCK DETAILS MODAL -->
+  <div class="modal-backdrop hidden" id="stock-modal">
+    <div class="modal-card">
+      <div class="modal-glow"></div>
+      <div class="modal-header">
+        <h3>Feed Stock Details</h3>
+        <button class="close-btn" id="close-stock-modal-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-summary">Register new inventory quantities or adjust standard blank levels</p>
+        
+        <form id="stock-feed-form" class="form-themed mt-16">
+          <div class="form-group">
+            <label class="form-label">Item Category</label>
+            <select id="stock-type" class="form-select" required>
+              <option value="lens">Optical Lens Blank</option>
+              <option value="coating">Protective Coating</option>
+            </select>
+          </div>
+          
+          <!-- LENS FIELDS (Thickness / Index) -->
+          <div class="form-group mt-12" id="stock-lens-group">
+            <label class="form-label">Lens Thickness (Index)</label>
+            <select id="stock-lens-index-select" class="form-select" style="width: 100%;">
+              <option value="1.50">1.50 Standard (CR-39 Standard)</option>
+              <option value="1.60">1.60 Thin (High Index Thin)</option>
+              <option value="1.67">1.67 Extra Thin (Ultra Tough Thin)</option>
+              <option value="1.74">1.74 Ultra Thin (Thinnest Elite)</option>
+            </select>
+          </div>
+          
+          <!-- COATING FIELDS -->
+          <div class="form-group mt-12 hidden" id="stock-coating-group">
+            <label class="form-label">Coating Type</label>
+            <select id="stock-coating-select" class="form-select" style="width: 100%;">
+              <option value="Standard Hard Coat">Standard Hard Coat</option>
+              <option value="Anti-Glare ARC">Anti-Glare ARC</option>
+              <option value="Blue Shield Shield">Blue Shield Shield</option>
+              <option value="Luminescent Solar Tint">Luminescent Solar Tint</option>
+            </select>
+          </div>
+          
+          <div class="form-row mt-12">
+            <div class="form-col">
+              <label class="form-label">Quantity to Add</label>
+              <input type="number" id="stock-qty" class="form-input" min="1" value="50" required style="padding-left: 16px;">
+            </div>
+            <div class="form-col">
+              <label class="form-label">Minimum Stock Alert Threshold</label>
+              <input type="number" id="stock-min-limit" class="form-input" min="0" value="20" required style="padding-left: 16px;">
+            </div>
+          </div>
+          
+          <div class="modal-actions mt-24" style="display: flex; gap: 16px; justify-content: flex-end;">
+            <button type="button" class="btn btn-secondary" id="stock-modal-cancel-btn">Cancel</button>
+            <button type="submit" class="btn btn-orange" id="stock-modal-submit-btn">
+              <i data-lucide="plus-circle"></i> Feed Stock
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI ROUTING & DEMAND FORECAST SUGGESTION MODAL -->
+  <div class="modal-backdrop hidden" id="ai-suggestion-modal">
+    <div class="modal-card">
+      <div class="modal-glow"></div>
+      <div class="modal-header">
+        <h3 style="display: flex; align-items: center; gap: 8px; font-weight: 700; color: var(--text-primary);">
+          <i data-lucide="brain" class="text-orange" style="color: var(--orange-primary);"></i> AI fulfillment Suggestion
+        </h3>
+        <button class="close-btn" id="close-ai-modal-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-summary" style="color: var(--text-muted); font-size: 13px;">AI demand forecasting and inventory fulfillment predictions</p>
+        
+        <div class="ai-suggestion-details mt-16" style="margin-top: 16px;">
+          <div style="display: flex; gap: 16px; margin-bottom: 20px;">
+            <div class="ai-stat-box" style="flex: 1; background: rgba(255, 107, 0, 0.05); border: 1px solid var(--border-orange-low); border-radius: 8px; padding: 12px; text-align: center;">
+              <span style="font-size: 11px; text-transform: uppercase; color: var(--text-secondary); display: block; font-weight: 600;">Sourcing Strategy</span>
+              <strong id="ai-sourcing-strategy" style="font-size: 18px; color: var(--orange-primary); display: block; margin-top: 4px;">In House</strong>
+            </div>
+            <div class="ai-stat-box" style="flex: 1; background: rgba(255, 107, 0, 0.05); border: 1px solid var(--border-orange-low); border-radius: 8px; padding: 12px; text-align: center;">
+              <span style="font-size: 11px; text-transform: uppercase; color: var(--text-secondary); display: block; font-weight: 600;">Monthly Demand</span>
+              <strong id="ai-monthly-demand" style="font-size: 18px; color: var(--text-primary); display: block; margin-top: 4px;">12.4 Units</strong>
+            </div>
+          </div>
+
+          <div class="insight-box alert-border-left mb-16" style="margin-bottom: 16px; background: rgba(255, 107, 0, 0.05); border-left: 4px solid var(--orange-primary); padding: 12px; border-radius: 4px;">
+            <div style="display: flex; align-items: flex-start; gap: 10px;">
+              <i data-lucide="sparkles" style="margin-top: 2px; flex-shrink: 0; color: var(--orange-primary);"></i>
+              <div>
+                <strong style="color: var(--text-primary); font-size: 13px;">AI Demand Insight:</strong>
+                <p id="ai-demand-insight-text" style="margin: 4px 0 0 0; font-size: 13px; color: var(--text-secondary); line-height: 1.4;">Power -2.75 is frequently ordered.</p>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-white-low); padding-bottom: 8px;">
+              <span style="font-size: 13px; color: var(--text-secondary);">Recommended Stock Quantity:</span>
+              <strong id="ai-recommended-stock" style="font-size: 14px; color: var(--text-primary);">15 units</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-white-low); padding-bottom: 8px;">
+              <span style="font-size: 13px; color: var(--text-secondary);">Stockout Probability Next Week:</span>
+              <strong id="ai-stockout-prob" style="font-size: 14px; color: var(--color-danger); font-weight: 700;">82%</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-actions mt-24" style="display: flex; justify-content: flex-end; margin-top: 24px;">
+          <button type="button" class="btn btn-orange" id="ai-modal-ok-btn" style="padding: 10px 24px;">Got it</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Simulated Notification Toaster -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Core scripts -->
+  <script src="app.js?v=1.1.4"></script>
+</body>
+</html>
