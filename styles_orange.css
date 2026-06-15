@@ -1765,6 +1765,7 @@ body.portal-state .main-content {
   border: none;
   backdrop-filter: none;
   box-shadow: none;
+  pointer-events: auto;
 }
 
 .overlay-card h1 {
