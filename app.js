@@ -223,6 +223,9 @@ async function runHourlyBreachCheck() {
       if (activeTab === "orders") initTable();
       if (activeTab === "predictions") initPredictions();
 
+      // Automatically check and dispatch SLA breach alerts for critical orders
+      autoDispatchSlaAlerts();
+
       // Scan for first order that breaches the 65% threshold and lacks a logged reason
       const criticalOrder = orders.find(ord => ord.stage !== "Delivered" && ord.breachRisk > 65 && !ord.delayReason);
       if (criticalOrder) {
@@ -273,6 +276,9 @@ async function calculateBreachScore(orderId) {
       // Show prediction toast
       showToast("Breach Risk Calculated", `Order ${orderId} has a breach risk of ${result.breach_risk}%.`, result.breach_risk > 65 ? "danger" : "success");
 
+      // Automatically check and dispatch SLA breach alerts for critical orders
+      autoDispatchSlaAlerts();
+
       // Check if breach risk is higher than 65% and delay reason is empty
       if (result.breach_risk > 65 && !ord.delayReason) {
         setTimeout(() => {
@@ -314,14 +320,17 @@ async function switchTab(tabId) {
 
   activeTab = tabId;
 
-  // Toggle portal view state
+  // Toggle portal view state and 3D background canvas visibility
+  const bgCanvas = document.getElementById("bg-3d-canvas");
   if (tabId === "home") {
+    if (bgCanvas) bgCanvas.style.display = "block";
     document.body.classList.add("portal-state");
     setTimeout(() => {
       if (typeof resizeCanvas === "function") resizeCanvas();
       if (typeof handleHomeScroll === "function") handleHomeScroll();
     }, 50);
   } else {
+    if (bgCanvas) bgCanvas.style.display = "none";
     document.body.classList.remove("portal-state");
     
     // Update headers
@@ -578,6 +587,9 @@ async function loadOrders() {
       updateDashboardKPIs();
       if (activeTab === "orders") initTable();
       if (activeTab === "predictions") initPredictions();
+      
+      // Automatically check and dispatch SLA breach alerts for critical orders
+      autoDispatchSlaAlerts();
     }
   } catch (err) {
     console.error("Failed to load orders:", err);
@@ -1329,6 +1341,9 @@ function initStatusForm() {
       updateDashboardKPIs();
       initPredictions();
 
+      // Automatically check and dispatch SLA breach alerts for critical orders
+      autoDispatchSlaAlerts();
+
     } catch (error) {
       showToast("Sync Error", error.message || "Could not sync stage update to Supabase.", "danger");
     }
@@ -1336,7 +1351,7 @@ function initStatusForm() {
 }
 
 // Send Real SMTP Email notification via Backend API
-async function simulateEmailAlert(orderId) {
+async function simulateEmailAlert(orderId, force = true) {
   const ord = orders.find(o => o.id === orderId);
   if (!ord) return;
 
@@ -1358,7 +1373,7 @@ async function simulateEmailAlert(orderId) {
     const token = session?.access_token;
     if (!token) throw new Error("No active authenticated session found.");
 
-    const response = await fetch(`/api/orders/${orderId}/send-alert-email`, {
+    const response = await fetch(`/api/orders/${orderId}/send-alert-email?force=${force}`, {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${token}`
@@ -1370,14 +1385,20 @@ async function simulateEmailAlert(orderId) {
       throw new Error(result.detail || "Failed to transmit SMTP alert email.");
     }
 
-    showToast(
-      "Email Dispatched",
-      result.message || `Alert email successfully sent for order ${orderId}.`,
-      "success"
-    );
+    if (result.status === "skipped") {
+      console.log(`Email alert skipped: ${result.message}`);
+    } else {
+      showToast(
+        "Email Dispatched",
+        result.message || `Alert email successfully sent for order ${orderId}.`,
+        "success"
+      );
+    }
   } catch (error) {
     console.error("Error sending email alert:", error);
-    showToast("Email Error", error.message || "Could not dispatch alert email.", "danger");
+    if (force) {
+      showToast("Email Error", error.message || "Could not dispatch alert email.", "danger");
+    }
   } finally {
     // Restore buttons
     originalHtmls.forEach(item => {
@@ -1386,6 +1407,24 @@ async function simulateEmailAlert(orderId) {
     });
     if (typeof lucide !== 'undefined') {
       lucide.createIcons();
+    }
+  }
+}
+
+// Automatically check all loaded orders and dispatch email alerts if breach risk reaches >= 65%
+async function autoDispatchSlaAlerts() {
+  for (const ord of orders) {
+    if (ord.stage !== "Delivered" && ord.breachRisk >= 65) {
+      // Check if an alert was already logged in this order's history for the current stage
+      const alreadySent = ord.history && ord.history.some(h => 
+        h.action && h.action.includes("Automated SLA Alert") && h.action.includes(`Stage: ${ord.stage}`)
+      );
+      
+      if (!alreadySent) {
+        console.log(`Auto-dispatching SLA breach alert for Order ${ord.id} at stage ${ord.stage} (Risk: ${ord.breachRisk}%)`);
+        // Call email alert with force = false so it checks stage and logs to history
+        simulateEmailAlert(ord.id, false);
+      }
     }
   }
 }

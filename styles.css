@@ -90,7 +90,7 @@
 
 body {
   font-family: var(--font-body);
-  background-color: var(--bg-space);
+  background: radial-gradient(circle at 50% 50%, #ffffff 0%, #e5e7eb 100%);
   color: var(--text-primary);
   overflow-x: hidden;
   min-height: 100vh;
@@ -106,7 +106,7 @@ body {
   height: 100vh;
   z-index: -2;
   pointer-events: none;
-  background: radial-gradient(circle at 50% 50%, #ffffff 0%, #e5e7eb 100%);
+  background: transparent;
 }
 
 /* Main Layout Structure */

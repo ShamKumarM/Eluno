@@ -366,7 +366,7 @@ def get_protected_data(current_user: dict = Depends(get_current_user)):
     }
 
 @app.post("/api/orders/{order_id}/send-alert-email")
-def send_alert_email(order_id: str, authorization: str = Header(None), current_user: dict = Depends(get_current_user)):
+def send_alert_email(order_id: str, force: bool = False, authorization: str = Header(None), current_user: dict = Depends(get_current_user)):
     try:
         import smtplib
         from email.mime.text import MIMEText
@@ -378,11 +378,29 @@ def send_alert_email(order_id: str, authorization: str = Header(None), current_u
             raise HTTPException(status_code=404, detail="Order not found.")
         
         order = record_res.data[0]
+        history = order.get("history") or []
+        stage = order.get("stage", "Intake")
         
         # Get receiver email (the currently logged-in user)
         receiver_email = current_user.get("email")
         if not receiver_email:
             raise HTTPException(status_code=400, detail="Recipient email not found in session.")
+        
+        # Calculate dynamic SLA and risk
+        order_with_sla = compute_dynamic_sla(order)
+        risk = order_with_sla.get("breach_risk", 0)
+        
+        # Check if alert was already sent for this stage (unless forced)
+        already_sent = any(
+            "Automated SLA Alert" in h.get("action", "") and f"Stage: {stage}" in h.get("action", "")
+            for h in history
+        )
+        
+        if already_sent and not force:
+            return {
+                "status": "skipped",
+                "message": f"Alert already sent to {receiver_email} for stage '{stage}'."
+            }
         
         # Load SMTP credentials
         smtp_host = os.getenv("SMTP_HOST")
@@ -401,11 +419,7 @@ def send_alert_email(order_id: str, authorization: str = Header(None), current_u
         msg = MIMEMultipart()
         msg['From'] = smtp_sender
         msg['To'] = receiver_email
-        msg['Subject'] = f"Eluno SLA Alert - Order {order['id']}"
-        
-        # Dynamic SLA and risk calculations
-        order_with_sla = compute_dynamic_sla(order)
-        risk = order_with_sla.get("breach_risk", 0)
+        msg['Subject'] = f"Eluno SLA Alert - Order {order['id']} ({stage})"
         
         body = f"""
         <html>
@@ -470,6 +484,14 @@ def send_alert_email(order_id: str, authorization: str = Header(None), current_u
         server.login(smtp_username, smtp_password)
         server.sendmail(smtp_sender, receiver_email, msg.as_string())
         server.quit()
+        
+        # Save to history trail
+        now_str = datetime.now().strftime("%Y-%m-%d %H:%M")
+        history.append({
+            "time": now_str,
+            "action": f"Automated SLA Alert sent to {receiver_email} (Stage: {stage}, Risk: {risk}%)"
+        })
+        client.table("orders").update({"history": history}).eq("id", order_id).execute()
         
         return {"status": "success", "message": f"Alert email successfully sent to {receiver_email}"}
         

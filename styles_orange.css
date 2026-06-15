@@ -90,7 +90,7 @@
 
 body {
   font-family: var(--font-body);
-  background-color: transparent;
+  background: radial-gradient(circle at 50% 50%, #ffffff 0%, #e5e7eb 100%);
   color: var(--text-primary);
   overflow-x: hidden;
   min-height: 100vh;
@@ -106,7 +106,7 @@ body {
   height: 100vh;
   z-index: -2;
   pointer-events: none;
-  background: radial-gradient(circle at 50% 50%, #ffffff 0%, #e5e7eb 100%);
+  background: transparent;
 }
 
 /* Main Layout Structure */
@@ -1760,12 +1760,11 @@ body.portal-state .main-content {
 
 .overlay-card {
   max-width: 580px;
-  background: rgba(13, 13, 13, 0.85);
-  padding: 48px;
-  border-radius: 16px;
-  border: 1px solid rgba(255, 107, 0, 0.25);
-  backdrop-filter: blur(16px);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 107, 0, 0.05);
+  background: transparent;
+  padding: 24px 0;
+  border: none;
+  backdrop-filter: none;
+  box-shadow: none;
 }
 
 .overlay-card h1 {

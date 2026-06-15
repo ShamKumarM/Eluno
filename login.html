@@ -143,8 +143,7 @@
   </style>
 </head>
 <body class="light-theme">
-  <!-- 3D Canvas Background -->
-  <canvas id="bg-3d-canvas" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2; pointer-events: none; background: radial-gradient(circle at 50% 50%, #ffffff 0%, #e5e7eb 100%);"></canvas>
+  <!-- Dynamic Background styled via CSS -->
 
   <div class="login-wrapper">
     <div class="login-card">
@@ -218,79 +217,13 @@
   <!-- Notification Toaster -->
   <div class="toast-container" id="toast-container"></div>
 
-  <!-- Three.js Visualizer Core for rotating Background model -->
+  <!-- Initializer Script for UI icons -->
   <script>
-    // Simplified background renderer for login page
     document.addEventListener("DOMContentLoaded", () => {
-      const canvas = document.getElementById("bg-3d-canvas");
-      if (!canvas) return;
-
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
-      camera.position.z = 8;
-
-      const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-      // Add lights
-      const ambientLight = new THREE.AmbientLight(0xffffff, 0.95);
-      scene.add(ambientLight);
-
-      const dirLight = new THREE.DirectionalLight(0xffffff, 0.5);
-      dirLight.position.set(2, 4, 5);
-      scene.add(dirLight);
-
-      // Load eyewear_luxury.png
-      const textureLoader = new THREE.TextureLoader();
-      let eyewearMesh;
-
-      textureLoader.load("eyewear_luxury.png", (texture) => {
-        const geometry = new THREE.PlaneGeometry(4.5, 4.5);
-        const material = new THREE.MeshBasicMaterial({
-          map: texture,
-          side: THREE.DoubleSide,
-          transparent: true,
-          opacity: 0.95
-        });
-
-        eyewearMesh = new THREE.Mesh(geometry, material);
-        if (window.innerWidth > 992) {
-          eyewearMesh.position.set(2.4, 0, 0);
-        } else {
-          eyewearMesh.position.set(0, -1.2, 0);
-        }
-        scene.add(eyewearMesh);
-      });
-
-      // Animate background rotation
-      function animate() {
-        requestAnimationFrame(animate);
-        if (eyewearMesh) {
-          eyewearMesh.rotation.y += 0.005;
-          eyewearMesh.rotation.x = Math.sin(Date.now() * 0.0005) * 0.15;
-        }
-        renderer.render(scene, camera);
-      }
-      animate();
-
-      window.addEventListener("resize", () => {
-        const w = window.innerWidth;
-        const h = window.innerHeight;
-        camera.aspect = w / h;
-        camera.updateProjectionMatrix();
-        renderer.setSize(w, h);
-        if (eyewearMesh) {
-          if (w > 992) {
-            eyewearMesh.position.set(2.4, 0, 0);
-          } else {
-            eyewearMesh.position.set(0, -1.2, 0);
-          }
-        }
-      });
-
       // Replace Lucide Icons
-      lucide.createIcons();
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      }
     });
   </script>
   <!-- Auth Script -->
